@@ -1,0 +1,42 @@
+body {
+  font-family: 'PT Sans', sans-serif; }
+
+a {
+  color: inherit; }
+
+.container {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 40px; }
+
+code {
+  display: block;
+  margin: 10px -10px;
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 2px;
+  color: #555;
+  font-family: monospace; }
+
+h1 {
+  font-size: 24px; }
+
+hr {
+  margin: 30px 0; }
+
+.red {
+  color: red;
+  border-color: red; }
+
+input {
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-radius: 2px;
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  background-color: #ededed;
+  outline: none;
+  transition: color .1s, border-color .1s; }
+
+/*# sourceMappingURL=all.css.map */

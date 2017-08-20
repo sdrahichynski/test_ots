@@ -1,0 +1,16 @@
+.red {
+	color: red;
+	border-color: red;
+}
+
+input {
+	margin-bottom: 10px;
+	font-size: 16px;
+	border-radius: 2px;
+	padding: 5px 20px;
+	border: 1px solid #ccc;
+	background-color: #ededed;
+	outline: none;
+
+	transition: color .1s, border-color .1s;
+}
