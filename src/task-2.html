@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Test</title>
+
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans&amp;subset=cyrillic" rel="stylesheet">
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+
+	<div class="container">
+		<h1>Task 2</h1>
+
+		<div>
+			<h3>Условие:</h3>
+			<p>
+				Допустим, что по url:
+
+				<code>
+					http://любой_домен/filter?size=M&color=1,2&manufacturer=aaa,eee
+				</code>
+
+				находится страница, на которой есть такие поля:
+
+				<ul>
+					<li>радио для size (значения - S, M, L)</li>
+					<li>несколько чекбоксов для color (значения - 1, 2, 3, 4, 5)</li>
+					<li>мультиселект (select multiple) для manufacturer (значения - "aaa", "b&c", "ddd", "eee") </li>
+					<li>чекбокс "распродажа" (значение - 1)</li>
+				</ul>
+
+				Допустим также, что сервер при генерации html ни одно из полей не заполняет, то есть радио не выбран, чекбоксы пустые и т.д.
+
+				<strong>Задача:</strong> набросать самую элементарную разметку для указанных инпутов и написать скрипт, который
+
+				<ul>
+					<li>при загрузке страницы разберёт значения фильтров из url и расставит их по соответствующим полям</li>
+					<li>при изменении состояния в любом инпуте, кроме "распродажа", выведет в консоль аналогичный приведённому в условии url с актуальными значениями фильтров</li>
+				</ul>
+
+			</p>
+		</div>
+
+		<hr>
+
+		<div class="solution">
+			<h3>Решение:</h3>
+
+			<div>
+				<div class="size">
+					<p>Size:</p>
+
+					<label>
+						<span>S:</span>
+						<input type="radio" name="size" value="S">
+					</label>
+
+					<label>
+						<span>M:</span>
+						<input type="radio" name="size" value="M">
+					</label>
+
+					<label>
+						<span>L:</span>
+						<input type="radio" name="size" value="L">
+					</label>
+				</div>
+				<!-- size close -->
+
+
+				<div class="color">
+					<p>Color:</p>
+
+					<label>
+						<span class="color-1"></span>
+						<input type="checkbox" name="color" value="1">
+					</label>
+
+					<label>
+						<span class="color-2"></span>
+						<input type="checkbox" name="color" value="2">
+					</label>
+
+					<label>
+						<span class="color-3"></span>
+						<input type="checkbox" name="color" value="3">
+					</label>
+
+					<label>
+						<span class="color-4"></span>
+						<input type="checkbox" name="color" value="4">
+					</label>
+
+					<label>
+						<span class="color-5"></span>
+						<input type="checkbox" name="color" value="5">
+					</label>
+				</div>
+				<!-- color close -->
+
+				<div class="manufacturer">
+					<p>Manufacturer:</p>
+					<select name="manufacturer">
+						<option value="" disabled selected></option>
+						<option value="aaa">aaa</option>
+						<option value="b&amp;c">b&amp;c</option>
+						<option value="ddd">ddd</option>
+						<option value="eee">eee</option>
+					</select>
+				</div>
+
+			</div>
+
+			<a class="code-example" href="https://github.com/GrayD77/test_ots/blob/master/src/js/task-2.js" target="_blank">Код примера.</a>
+		</div>
+
+	</div>
+
+
+	<script src="js/all.js"></script>
+</body>
+</html>

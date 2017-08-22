@@ -63,5 +63,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	smartInputsDOMElements.forEach(function (el) {
 		smartInputs.push(new SmartInput(el));
 	});
+})();;'use strict';
+
+;(function () {
+
+	var args = window.location.search.slice(1).split('&');
+	var argsParsed = args.reduce(function (summ, current, index, array) {
+
+		var arg = current.split('=');
+		var key = decodeURIComponent(arg[0]);
+		var value = decodeURIComponent(arg[1]).split(',');
+
+		if (value.length === 1) value = value[0];
+		summ[key] = value;
+
+		return summ;
+	}, {});
+
+	console.log(argsParsed);
 })();
 //# sourceMappingURL=all.js.map
