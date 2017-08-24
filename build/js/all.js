@@ -67,19 +67,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 ;(function () {
 
-	var args = window.location.search.slice(1).split('&');
-	var argsParsed = args.reduce(function (summ, current, index, array) {
+	function parseArgs() {
+		var args = window.location.search.slice(1).split('&');
+		var argsParsed = args.reduce(function (summ, current, index, array) {
 
-		var arg = current.split('=');
-		var key = decodeURIComponent(arg[0]);
-		var value = decodeURIComponent(arg[1]).split(',');
+			var arg = current.split('=');
+			var key = decodeURIComponent(arg[0]);
+			var value = decodeURIComponent(arg[1]).split(',');
 
-		if (value.length === 1) value = value[0];
-		summ[key] = value;
+			if (value.length === 1) value = value[0];
+			summ[key] = value;
 
-		return summ;
-	}, {});
+			return summ;
+		}, {});
 
-	console.log(argsParsed);
+		return argsParsed;
+	}
+
+	function fillTheForm(form, values) {
+		// form- DOM object
+		// values -  { key: value, ... }
+		for (var key in values) {
+
+			form.elements[key].value = values[key];
+		}
+
+		// console.log(form.elements['size'].value = 'L');
+	}
+
+	var args = parseArgs();
+	var form = document.querySelector('.query-params');
+
+	fillTheForm(form, args);
 })();
 //# sourceMappingURL=all.js.map
