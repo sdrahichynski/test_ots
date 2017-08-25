@@ -129,6 +129,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 							}
 						}
 
+						name = encodeURIComponent(name);
+						values = values.map(encodeURIComponent);
+
 						resArray.push(name + '=' + values.join(','));
 
 						break;
@@ -213,5 +216,5 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		e.stopPropagation();
 		return false;
 	}, false);
-})();
+})();;"use strict";
 //# sourceMappingURL=all.js.map

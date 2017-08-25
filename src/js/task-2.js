@@ -62,6 +62,9 @@
 							}
 						}
 
+						name = encodeURIComponent(name);
+						values = values.map(encodeURIComponent);
+
 						resArray.push(`${name}=${values.join(',')}`);
 
 						break;
