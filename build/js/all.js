@@ -151,6 +151,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	function fillTheForm(form, values) {
 		// form - form DOM element
 		// values -  { key: value, ... }
+		if (!form || form.nodeName !== 'FORM') return;
 
 		for (var key in values) {
 			setValue(form, key, values[key]);
@@ -206,8 +207,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	var args = parseSearchString();
 	var form = document.querySelector('.query-params');
 
+	if (!form) return;
+
 	fillTheForm(form, args);
 
+	// events
 	form.addEventListener('change', function () {
 		console.log(window.location.href.split('?')[0] + '?' + formToSearchString(this, ['on-sale']));
 	}, false);
@@ -216,5 +220,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		e.stopPropagation();
 		return false;
 	}, false);
-})();;"use strict";
+})();;'use strict';
+
+;(function () {
+
+	var result1 = void 0,
+	    result2 = void 0;
+	var requestButtons = document.querySelectorAll('.request');
+	var responseField = document.querySelector('.response');
+
+	if (!requestButtons) return;
+
+	window.addEventListener('click', function (e) {
+		var target = e.target;
+
+		if (target.classList.contains('request')) {
+			var url = target.getAttribute('data-url');
+		}
+	});
+})();
 //# sourceMappingURL=all.js.map

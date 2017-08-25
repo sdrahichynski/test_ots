@@ -84,6 +84,7 @@
 	function fillTheForm(form, values) {
 		// form - form DOM element
 		// values -  { key: value, ... }
+		if (!form || form.nodeName !== 'FORM') return;
 
 		for (let key in values) {
 			setValue(form, key, values[key])
@@ -143,10 +144,12 @@
 	let args = parseSearchString();
 	let form = document.querySelector('.query-params');
 
+	if (!form) return;
+
 	fillTheForm(form, args);
 
 
-
+	// events
 	form.addEventListener('change', function() {
 		console.log(`${window.location.href.split('?')[0]}?${formToSearchString(this, ['on-sale'])}`);
 	}, false);
