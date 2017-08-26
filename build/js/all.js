@@ -250,7 +250,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	// какая-то функция, которую надо выполнить, когда пришли оба ответа
 	function tryToSayHello() {
 		if (!results[0] || !results[1]) return;
-		fillResponseField(results[0].greating + ', ' + results[1].name + ' !');
+		fillResponseField(results[0].text + ' ' + results[1].text + ' !');
+		console.log('Оба ответа получены');
 	}
 
 	// какая-то функция, которую надо выполнить, когда один из запросов выполнился с ошибкой
@@ -280,8 +281,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			httpGet(url).then(function (response) {
 				results[index] = JSON.parse(response);
 				tryToSayHello();
-
-				console.log(results.length + ' \u043E\u0442\u0432\u0435\u0442\u043E\u0432 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u043E');
 			}, function (error) {
 				onError(error);
 				target.disabled = false;

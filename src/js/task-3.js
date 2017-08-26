@@ -28,7 +28,8 @@
 	// какая-то функция, которую надо выполнить, когда пришли оба ответа
 	function tryToSayHello(){
 		if (!results[0] || !results[1]) return;
-		fillResponseField(`${results[0].greating}, ${results[1].name} !`);
+		fillResponseField(`${results[0].text} ${results[1].text} !`);
+		console.log('Оба ответа получены')
 	}
 
 	// какая-то функция, которую надо выполнить, когда один из запросов выполнился с ошибкой
@@ -62,7 +63,6 @@
 				results[index] = JSON.parse(response);
 				tryToSayHello();
 
-				console.log(`${results.length} ответов получено`);
 			}, (error) => {
 				onError(error);
 				target.disabled = false;
