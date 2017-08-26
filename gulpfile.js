@@ -10,19 +10,22 @@ const path = {
 	'src'   : {
 		'html': './src/*.html',
 		'js' : './src/js/**/*.js',
-		'scss': './src/scss/*.scss'
+		'scss': './src/scss/*.scss',
+		'public': './src/public/**/*.*'
 	},
 
 	'build' : {
 		'css' : './build/css/',
 		'html': './build/',
-		'js'  : './build/js/'
+		'js'  : './build/js/',
+		'public': './build/public/'
 	},
 
 	'watch' : {
 		'html': './src/*.html',
 		'js'  : './src/js/**/*.js',
-		'scss': './src/scss/**/*.scss'
+		'scss': './src/scss/**/*.scss',
+		'public': './src/public/**/*.*'
 	}
 };
 
@@ -69,12 +72,19 @@ gulp.task('style', () => {
 			.pipe(connect.reload({stream: true}));
 });
 
+gulp.task('public', () => {
+	return gulp.src([path.src.public])
+			.pipe(gulp.dest(path.build.public))
+			.pipe(connect.reload({stream: true}));
+});
+
 
 gulp.task('watch', () => {
 	gulp.watch(path.watch.html, ['html']);
 	gulp.watch(path.watch.js, ['js']);
 	gulp.watch(path.watch.scss, ['style']);
+	gulp.watch(path.watch.public, ['public']);
 });
 
 
-gulp.task('default', ['watch', 'connect', 'html', 'js', 'style']);
+gulp.task('default', ['watch', 'connect', 'html', 'js', 'style', 'public']);

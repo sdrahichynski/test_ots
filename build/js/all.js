@@ -224,8 +224,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 ;(function () {
 
-	var result1 = void 0,
-	    result2 = void 0;
+	// httpGet promise
+	function httpGet(url) {
+		return new Promise(function (resolve, reject) {
+
+			var req = new XMLHttpRequest();
+			req.open('GET', url);
+
+			req.onload = function () {
+				if (req.status === 200) {
+					resolve(req.response);
+				} else {
+					reject(Error(req.statusText));
+				}
+			};
+
+			req.onerror = function () {
+				reject(Error('Network Error'));
+			};
+
+			req.send();
+		});
+	}
+
+	// какая-то функция, которую надо выполнить, когда пришли оба ответа
+	function tryToSayHello() {
+		if (!results[0] || !results[1]) return;
+		fillResponseField(results[0].greating + ', ' + results[1].name + ' !');
+	}
+
+	// какая-то функция, которую надо выполнить, когда один из запросов выполнился с ошибкой
+	function onError(error) {
+		fillResponseField('<span class="error">' + error + '</span>');
+	}
+
+	function fillResponseField(html) {
+		responseField.innerHTML = html;
+	}
+
+	var results = [];
 	var requestButtons = document.querySelectorAll('.request');
 	var responseField = document.querySelector('.response');
 
@@ -234,8 +271,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	window.addEventListener('click', function (e) {
 		var target = e.target;
 
+		target.disabled = true;
+
 		if (target.classList.contains('request')) {
 			var url = target.getAttribute('data-url');
+			var index = target.getAttribute('data-index');
+
+			httpGet(url).then(function (response) {
+				results[index] = JSON.parse(response);
+				tryToSayHello();
+
+				console.log(results.length + ' \u043E\u0442\u0432\u0435\u0442\u043E\u0432 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u043E');
+			}, function (error) {
+				onError(error);
+				target.disabled = false;
+			});
 		}
 	});
 })();
