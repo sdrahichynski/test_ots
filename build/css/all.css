@@ -43,4 +43,12 @@ input {
   outline: none;
   transition: color .1s, border-color .1s; }
 
+iframe {
+  display: block;
+  width: 100%;
+  height: 300px;
+  background-color: #efefef;
+  border: 2px dashed #ccc;
+  border-radius: 3px; }
+
 /*# sourceMappingURL=all.css.map */
