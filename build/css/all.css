@@ -43,6 +43,53 @@ input {
   outline: none;
   transition: color .1s, border-color .1s; }
 
+.size,
+.color {
+  display: inline-block;
+  width: 200px; }
+
+select {
+  width: 200px;
+  height: calc(6em + 40px);
+  margin-bottom: 20px;
+  line-height: 1.2;
+  border: none;
+  box-shadow: 0 0 0 1px #aaa; }
+  select option {
+    padding: 4px 12px; }
+
+.color label {
+  display: inline-block; }
+
+.color-1,
+.color-2,
+.color-3,
+.color-4,
+.color-5 {
+  display: block;
+  height: 12px;
+  width: 12px;
+  margin: 0 auto 3px;
+  box-shadow: 0 0 0 1px rgba(111, 111, 111, 0.2); }
+
+.color-1 {
+  background-color: #a55; }
+
+.color-2 {
+  background-color: #fff; }
+
+.color-2 {
+  background-color: #5a5; }
+
+.color-3 {
+  background-color: #55a; }
+
+.color-4 {
+  background-color: #bada55; }
+
+.color-5 {
+  background-color: #bad; }
+
 iframe {
   display: block;
   width: 100%;

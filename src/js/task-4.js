@@ -1,7 +1,10 @@
 ;(function(){
 
-	let formMessage = document.querySelectorAll('.send-message');
-	let receiver = document.querySelector('.domain-two').contentWindow;
+	let messageForms = document.querySelectorAll('.send-message');
+	let receiver = document.querySelector('.domain-two')? document.querySelector('.domain-two').contentWindow : null;
+
+	if (!receiver) return;
+
 	let iframeCallback = function() {
 		return function(url) {
 
@@ -10,27 +13,26 @@
 
 			req.onload = function(){
 				if (req.status === 200){
-					console.log(234)
-					console.log(JSON.parse(req.response));
+					console.log('Callback: ', JSON.parse(req.response));
 				} else {
-					console.log(Error(req.statusText));
+					console.log('Callback: ', Error(req.statusText));
 				}
 			};
 
 			req.onerror = function() {
-				console.log(Error('Network Error'));
+				console.log('Callback: ', Error('Network Error'));
 			};
 
 			req.send();
 		}
-	}
+	};
 
 
-	formMessage.forEach((form) => {
+	messageForms.forEach((form) => {
 
 		form.addEventListener('submit', function(e){
 			e.preventDefault();
-			// let msg = `${this.elements['name'].value} : ${this.elements['value'].value}`;
+
 			let name = this.elements['name'] ? this.elements['name'].value : null;
 			let value = this.elements['value'] ? this.elements['value'].value : null;
 

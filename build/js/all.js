@@ -290,8 +290,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 ;(function () {
 
-	var formMessage = document.querySelectorAll('.send-message');
-	var receiver = document.querySelector('.domain-two').contentWindow;
+	var messageForms = document.querySelectorAll('.send-message');
+	var receiver = document.querySelector('.domain-two') ? document.querySelector('.domain-two').contentWindow : null;
+
+	if (!receiver) return;
+
 	var iframeCallback = function iframeCallback() {
 		return function (url) {
 
@@ -300,26 +303,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 			req.onload = function () {
 				if (req.status === 200) {
-					console.log(234);
-					console.log(JSON.parse(req.response));
+					console.log('Callback: ', JSON.parse(req.response));
 				} else {
-					console.log(Error(req.statusText));
+					console.log('Callback: ', Error(req.statusText));
 				}
 			};
 
 			req.onerror = function () {
-				console.log(Error('Network Error'));
+				console.log('Callback: ', Error('Network Error'));
 			};
 
 			req.send();
 		};
 	};
 
-	formMessage.forEach(function (form) {
+	messageForms.forEach(function (form) {
 
 		form.addEventListener('submit', function (e) {
 			e.preventDefault();
-			// let msg = `${this.elements['name'].value} : ${this.elements['value'].value}`;
+
 			var name = this.elements['name'] ? this.elements['name'].value : null;
 			var value = this.elements['value'] ? this.elements['value'].value : null;
 

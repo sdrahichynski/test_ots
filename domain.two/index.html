@@ -45,6 +45,7 @@
 		window.onload = () => {
 			let dataUrl = 'domain-two.json';
 
+			// выводит на экран данные из localstorage
 			function showStorage() {
 
 				let msgContainer = document.querySelector('.local-storage-container');
@@ -54,18 +55,26 @@
 				msgContainer.innerHTML = convertJSONString2HTML(data);
 			}
 
+			// обработчик postMessage
 			function receiveMessage(e){
+
 				let localStorage = window.localStorage;
+				// данные для каждого домена хранятся с соответствующим ключом:
 				let storageData = localStorage.getItem(e.origin);
+
+				// данные в строке. #tyie
 				let receivedData = JSON.parse(e.data);
+				// вытаскиваем функцию обратного вызова
 				let callback = eval(`(${decodeURI(receivedData.callback)})()`);
 
+				// парсим данные их хранилища, или, если их нет, инициалзируем пустой объект
 				if (!storageData) {
 					storageData = {};
 				} else {
 					storageData = JSON.parse(storageData);
 				}
 
+				// делаем что сказано
 				switch (receivedData.action) {
 					case 'read': {
 						readStorage();
@@ -73,7 +82,7 @@
 					}
 
 					case 'remove': {
-						removeStorage();
+						removeFromStorage();
 						break;
 					}
 
@@ -84,9 +93,10 @@
 
 				}
 
+				// callback должен делать ajax
+				// все остальное может postMessage
 				callback(dataUrl);
 
-				// storageData[receivedData.name] = receivedData.value;
 
 
 				function readStorage(){
@@ -102,7 +112,7 @@
 					parent.postMessage(`Written: {"${receivedData.name}" : "${receivedData.value}"}`, e.origin);
 				}
 
-				function removeStorage(){
+				function removeFromStorage(){
 					let msg = `Removed: {"${receivedData.name}" : "${storageData[receivedData.name]}"}`;
 
 					delete storageData[receivedData.name];
@@ -111,6 +121,7 @@
 					parent.postMessage(msg, e.origin);
 				}
 
+
 				function saveDataToStorage(){
 					localStorage.setItem(e.origin, JSON.stringify(storageData));
 					window.dispatchEvent(new Event('storage'));
@@ -118,6 +129,7 @@
 
 			}
 
+			// для более-менее наглядного вывода JSON
 			function convertJSONString2HTML(data){
 				let dataStr = data;
 
