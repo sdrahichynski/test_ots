@@ -133,6 +133,8 @@
 			function convertJSONString2HTML(data){
 				let dataStr = data;
 
+				if (!data) return 'Nothing....';
+
 				dataStr = dataStr.split('{"').join('{<div class="json-fields">"');
 				dataStr = dataStr.split('"}').join('"</div>}');
 				dataStr = dataStr.split(',"').join(',<br>"');
