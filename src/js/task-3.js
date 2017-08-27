@@ -53,9 +53,9 @@
 	window.addEventListener('click', (e) => {
 		let target = e.target;
 
-		target.disabled = true;
 
 		if (target.classList.contains('request')) {
+			target.disabled = true;
 			let url = target.getAttribute('data-url');
 			let index = target.getAttribute('data-index');
 

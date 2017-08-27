@@ -272,9 +272,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	window.addEventListener('click', function (e) {
 		var target = e.target;
 
-		target.disabled = true;
-
 		if (target.classList.contains('request')) {
+			target.disabled = true;
 			var url = target.getAttribute('data-url');
 			var index = target.getAttribute('data-index');
 
@@ -287,5 +286,60 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			});
 		}
 	});
+})();;'use strict';
+
+;(function () {
+
+	var formMessage = document.querySelectorAll('.send-message');
+	var receiver = document.querySelector('.domain-two').contentWindow;
+	var iframeCallback = function iframeCallback() {
+		return function (url) {
+
+			var req = new XMLHttpRequest();
+			req.open('GET', url);
+
+			req.onload = function () {
+				if (req.status === 200) {
+					console.log(234);
+					console.log(JSON.parse(req.response));
+				} else {
+					console.log(Error(req.statusText));
+				}
+			};
+
+			req.onerror = function () {
+				console.log(Error('Network Error'));
+			};
+
+			req.send();
+		};
+	};
+
+	formMessage.forEach(function (form) {
+
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			// let msg = `${this.elements['name'].value} : ${this.elements['value'].value}`;
+			var name = this.elements['name'] ? this.elements['name'].value : null;
+			var value = this.elements['value'] ? this.elements['value'].value : null;
+
+			var msg = {
+				name: name,
+				value: value,
+				action: this.getAttribute('data-action'),
+				callback: encodeURI(iframeCallback.toString())
+			};
+
+			receiver.postMessage(JSON.stringify(msg), 'http://localhost:8000');
+
+			this.reset();
+		}, false);
+	});
+
+	function receiveMessage(e) {
+		console.log(e.data || 'Нет такой записи!');
+	}
+
+	window.addEventListener('message', receiveMessage);
 })();
 //# sourceMappingURL=all.js.map
